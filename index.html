@@ -3,366 +3,427 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Phùng Tiến Đạt | Profile</title>
+  <title>Phùng Tiến Đạt | IT Developer</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-  <!-- Particles Background -->
-  <div id="particles"></div>
+  <!-- Matrix Canvas -->
+  <canvas id="matrixCanvas"></canvas>
+
+  <!-- Scan line overlay -->
+  <div class="scanlines"></div>
 
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
-    <div class="nav-logo">PTĐ</div>
-    <ul class="nav-links">
-      <li><a href="#home" class="nav-link active">Trang chủ</a></li>
-      <li><a href="#about" class="nav-link">Về tôi</a></li>
-      <li><a href="#skills" class="nav-link">Kỹ năng</a></li>
-      <li><a href="#education" class="nav-link">Học vấn</a></li>
-      <li><a href="#contact" class="nav-link">Liên hệ</a></li>
-    </ul>
-    <div class="hamburger" id="hamburger">
-      <span></span><span></span><span></span>
+    <div class="nav-logo">
+      <span class="logo-bracket">&lt;</span>PTĐ<span class="logo-bracket">/&gt;</span>
     </div>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active"><span class="nav-num">01.</span>Home</a></li>
+      <li><a href="#about" class="nav-link"><span class="nav-num">02.</span>About</a></li>
+      <li><a href="#skills" class="nav-link"><span class="nav-num">03.</span>Skills</a></li>
+      <li><a href="#ai-section" class="nav-link"><span class="nav-num">04.</span>AI Vision</a></li>
+      <li><a href="#contact" class="nav-link"><span class="nav-num">05.</span>Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- ===== HERO ===== -->
   <section class="hero" id="home">
+    <div class="hero-grid-overlay"></div>
     <div class="hero-content">
       <div class="hero-text">
-        <p class="hero-greeting">Xin chào, tôi là</p>
-        <h1 class="hero-name">
-          <span class="typing" id="typingName"></span><span class="cursor">|</span>
-        </h1>
-        <p class="hero-role">
-          <span class="role-text">Sinh viên IT</span> &nbsp;·&nbsp;
-          <span class="role-text">Lập trình viên</span> &nbsp;·&nbsp;
-          <span class="role-text">Người học hỏi</span>
-        </p>
-        <p class="hero-desc">
-          Sinh viên ngành <strong>Công nghệ thông tin</strong> tại
-          <strong>Trường Đại học Điện Lực</strong>, đam mê lập trình và xây dựng
-          những sản phẩm công nghệ có giá trị.
-        </p>
-        <div class="hero-buttons">
-          <a href="#about" class="btn btn-primary">Khám phá</a>
-          <a href="#contact" class="btn btn-outline">Liên hệ tôi</a>
+        <div class="hero-status">
+          <span class="status-dot"></span>
+          <span class="mono">System Online // Ready</span>
         </div>
-      </div>
-      <div class="hero-avatar">
-        <input type="file" id="avatarInput" accept="image/*" style="display:none" />
-        <div class="avatar-ring" id="avatarRing" title="Nhấn để đổi ảnh">
-          <div class="avatar-inner" id="avatarInner">
-            <img src="" alt="Avatar" class="avatar-img" id="avatarImg" style="display:none" />
-            <div class="avatar-initials" id="avatarInitials">PTĐ</div>
-            <div class="avatar-overlay" id="avatarOverlay">
-              <i class="fas fa-camera"></i>
-              <span>Đổi ảnh</span>
-            </div>
+        <p class="hero-greeting mono">&gt; init profile.exe</p>
+        <h1 class="hero-name">
+          <span class="glitch" data-text="PHÙNG TIẾN ĐẠT">PHÙNG TIẾN ĐẠT</span>
+        </h1>
+        <div class="hero-role-wrap">
+          <span class="mono role-prefix">role = [</span>
+          <span class="typing-role" id="typingRole"></span>
+          <span class="cursor-block">█</span>
+          <span class="mono">]</span>
+        </div>
+        <p class="hero-desc">
+          Sinh viên <span class="highlight">Công nghệ thông tin</span> — 
+          <span class="highlight">Đại học Điện Lực</span>. 
+          Đam mê xây dựng phần mềm, khám phá AI và tạo ra những trải nghiệm số có giá trị.
+        </p>
+        <div class="hero-terminal">
+          <div class="terminal-bar">
+            <span class="t-dot red"></span><span class="t-dot yellow"></span><span class="t-dot green"></span>
+            <span class="mono t-title">bash ~ profile</span>
+          </div>
+          <div class="terminal-body">
+            <p><span class="t-prompt">$</span> <span class="mono t-cmd">whoami</span></p>
+            <p class="mono t-out">&gt; Phùng Tiến Đạt</p>
+            <p><span class="t-prompt">$</span> <span class="mono t-cmd">cat university.txt</span></p>
+            <p class="mono t-out">&gt; ĐH Điện Lực — CNTT</p>
+            <p><span class="t-prompt">$</span> <span class="mono t-cmd">ls skills/</span></p>
+            <p class="mono t-out">&gt; HTML CSS JS Python Java React...</p>
+            <p class="t-cursor-line"><span class="t-prompt">$</span> <span class="mono t-blink">_</span></p>
           </div>
         </div>
-        <div class="avatar-badge">
-          <i class="fas fa-code"></i>
-          <span>IT Student</span>
+        <div class="hero-buttons">
+          <a href="#about" class="btn btn-cyber">
+            <span class="btn-inner">KHÁM PHÁ</span>
+          </a>
+          <a href="#contact" class="btn btn-outline-cyber">LIÊN HỆ</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="avatar-wrapper">
+          <input type="file" id="avatarInput" accept="image/*" style="display:none" />
+          <div class="avatar-hex" id="avatarRing" title="Click để đổi ảnh">
+            <button class="avatar-remove" id="avatarRemove" title="Xóa ảnh" style="display:none"><i class="fas fa-times"></i></button>
+            <div class="hex-ring r1"></div>
+            <div class="hex-ring r2"></div>
+            <div class="hex-ring r3"></div>
+            <div class="avatar-inner" id="avatarInner">
+              <img src="" alt="Avatar" class="avatar-img" id="avatarImg" style="display:none" />
+              <div class="avatar-initials" id="avatarInitials">PTĐ</div>
+              <div class="avatar-overlay" id="avatarOverlay">
+                <i class="fas fa-camera"></i>
+                <span>Đổi ảnh</span>
+              </div>
+            </div>
+          </div>
+          <!-- Floating info chips -->
+          <div class="chip chip-1"><i class="fas fa-code"></i> Frontend Dev</div>
+          <div class="chip chip-2"><i class="fas fa-brain"></i> AI Learner</div>
+          <div class="chip chip-3"><i class="fas fa-bolt"></i> EPU Student</div>
         </div>
       </div>
     </div>
-    <div class="scroll-down">
-      <div class="mouse"><div class="wheel"></div></div>
-      <p>Cuộn xuống</p>
+
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span class="mono">scroll</span>
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- ===== ABOUT ===== -->
   <section class="section" id="about">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Về tôi</span>
-        <h2 class="section-title">Tôi là ai?</h2>
+        <span class="mono section-num">02.</span>
+        <h2 class="section-title">ABOUT<span class="title-accent">_ME</span></h2>
         <div class="section-line"></div>
       </div>
-      <div class="about-grid">
-        <div class="about-card" data-aos>
-          <div class="about-icon"><i class="fas fa-user-graduate"></i></div>
-          <h3>Học vấn</h3>
-          <p>Đang theo học chương trình đại học tại Trường Đại học Điện Lực, chuyên ngành Công nghệ thông tin.</p>
+
+      <div class="about-layout">
+        <div class="about-image-col" data-aos>
+          <div class="about-img-frame">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=500&q=80" alt="AI Tech" class="about-ai-img" />
+            <div class="img-overlay-text mono">AI_VISION.exe</div>
+            <div class="img-corner tl"></div>
+            <div class="img-corner tr"></div>
+            <div class="img-corner bl"></div>
+            <div class="img-corner br"></div>
+          </div>
         </div>
-        <div class="about-card" data-aos>
-          <div class="about-icon"><i class="fas fa-laptop-code"></i></div>
-          <h3>Đam mê</h3>
-          <p>Yêu thích lập trình web, thiết kế giao diện và khám phá các công nghệ mới trong lĩnh vực CNTT.</p>
-        </div>
-        <div class="about-card" data-aos>
-          <div class="about-icon"><i class="fas fa-bullseye"></i></div>
-          <h3>Mục tiêu</h3>
-          <p>Trở thành một lập trình viên chuyên nghiệp, đóng góp vào sự phát triển công nghệ của đất nước.</p>
-        </div>
-        <div class="about-card" data-aos>
-          <div class="about-icon"><i class="fas fa-heart"></i></div>
-          <h3>Sở thích</h3>
-          <p>Ngoài lập trình, tôi thích đọc sách công nghệ, chơi thể thao và tìm hiểu về AI & Machine Learning.</p>
+
+        <div class="about-text-col">
+          <div class="about-bio" data-aos>
+            <p>Xin chào! Tôi là <span class="highlight">Phùng Tiến Đạt</span> — sinh viên năm 4 ngành 
+            <span class="highlight">Công nghệ thông tin</span> tại Trường Đại học Điện Lực, Hà Nội.</p>
+            <p>Tôi đam mê lập trình web, nghiên cứu AI và xây dựng những sản phẩm kỹ thuật số. 
+            Mục tiêu của tôi là trở thành một <span class="highlight">Full-stack Developer</span> 
+            và đóng góp vào sự phát triển công nghệ của Việt Nam.</p>
+          </div>
+
+          <div class="info-grid" data-aos>
+            <div class="info-cell">
+              <span class="mono info-key">name</span>
+              <span class="info-val">Phùng Tiến Đạt</span>
+            </div>
+            <div class="info-cell">
+              <span class="mono info-key">university</span>
+              <span class="info-val">ĐH Điện Lực</span>
+            </div>
+            <div class="info-cell">
+              <span class="mono info-key">major</span>
+              <span class="info-val">Công nghệ thông tin</span>
+            </div>
+            <div class="info-cell">
+              <span class="mono info-key">location</span>
+              <span class="info-val">Hà Nội, Việt Nam</span>
+            </div>
+            <div class="info-cell">
+              <span class="mono info-key">status</span>
+              <span class="info-val status-green">● Available</span>
+            </div>
+            <div class="info-cell">
+              <span class="mono info-key">interest</span>
+              <span class="info-val">AI / Web / Security</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Info Cards -->
-      <div class="info-row" data-aos>
-        <div class="info-item">
-          <i class="fas fa-user"></i>
-          <div>
-            <span class="info-label">Họ và tên</span>
-            <span class="info-value">Phùng Tiến Đạt</span>
-          </div>
+      <!-- Stats row -->
+      <div class="stats-row" data-aos>
+        <div class="stat-box">
+          <div class="stat-num" data-count="3">0</div>
+          <div class="mono stat-lbl">Years_Study</div>
         </div>
-        <div class="info-item">
-          <i class="fas fa-university"></i>
-          <div>
-            <span class="info-label">Trường</span>
-            <span class="info-value">ĐH Điện Lực</span>
-          </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="15">0</div>
+          <div class="mono stat-lbl">Projects_Done</div>
         </div>
-        <div class="info-item">
-          <i class="fas fa-book-open"></i>
-          <div>
-            <span class="info-label">Chuyên ngành</span>
-            <span class="info-value">Công nghệ thông tin</span>
-          </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="8">0</div>
+          <div class="mono stat-lbl">Languages</div>
         </div>
-        <div class="info-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <div>
-            <span class="info-label">Địa điểm</span>
-            <span class="info-value">Hà Nội, Việt Nam</span>
-          </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="100" data-suffix="%">0</div>
+          <div class="mono stat-lbl">Passion_%</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section class="section section-dark" id="skills">
+  <!-- ===== SKILLS ===== -->
+  <section class="section section-alt" id="skills">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Kỹ năng</span>
-        <h2 class="section-title">Kỹ năng của tôi</h2>
+        <span class="mono section-num">03.</span>
+        <h2 class="section-title">TECH<span class="title-accent">_STACK</span></h2>
         <div class="section-line"></div>
       </div>
 
-      <div class="skills-wrapper">
-        <div class="skills-group" data-aos>
-          <h3 class="skills-group-title"><i class="fas fa-code"></i> Lập trình Frontend</h3>
+      <div class="skills-layout">
+        <div class="skill-panel" data-aos>
+          <div class="panel-header mono"><span class="t-prompt">&gt;</span> frontend/</div>
           <div class="skill-item">
-            <div class="skill-info">
-              <span>HTML5</span><span>90%</span>
-            </div>
+            <div class="skill-meta"><span>HTML5</span><span class="mono">90%</span></div>
             <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-info">
-              <span>CSS3 / SCSS</span><span>85%</span>
-            </div>
+            <div class="skill-meta"><span>CSS3 / SCSS</span><span class="mono">85%</span></div>
             <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-info">
-              <span>JavaScript</span><span>75%</span>
-            </div>
+            <div class="skill-meta"><span>JavaScript</span><span class="mono">75%</span></div>
             <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-info">
-              <span>ReactJS</span><span>60%</span>
-            </div>
+            <div class="skill-meta"><span>ReactJS</span><span class="mono">60%</span></div>
             <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
           </div>
         </div>
 
-        <div class="skills-group" data-aos>
-          <h3 class="skills-group-title"><i class="fas fa-server"></i> Lập trình Backend</h3>
+        <div class="skill-panel" data-aos>
+          <div class="panel-header mono"><span class="t-prompt">&gt;</span> backend/</div>
           <div class="skill-item">
-            <div class="skill-info">
-              <span>Python</span><span>70%</span>
-            </div>
+            <div class="skill-meta"><span>Python</span><span class="mono">70%</span></div>
             <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-info">
-              <span>Java</span><span>65%</span>
-            </div>
+            <div class="skill-meta"><span>Java</span><span class="mono">65%</span></div>
             <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-info">
-              <span>SQL / MySQL</span><span>72%</span>
-            </div>
+            <div class="skill-meta"><span>SQL / MySQL</span><span class="mono">72%</span></div>
             <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-info">
-              <span>Node.js</span><span>55%</span>
-            </div>
+            <div class="skill-meta"><span>Node.js</span><span class="mono">55%</span></div>
             <div class="skill-bar"><div class="skill-fill" data-width="55"></div></div>
           </div>
         </div>
-      </div>
 
-      <!-- Tech Tags -->
-      <div class="tech-tags" data-aos>
-        <span class="tech-tag"><i class="fab fa-git-alt"></i> Git</span>
-        <span class="tech-tag"><i class="fab fa-github"></i> GitHub</span>
-        <span class="tech-tag"><i class="fas fa-database"></i> MongoDB</span>
-        <span class="tech-tag"><i class="fab fa-docker"></i> Docker</span>
-        <span class="tech-tag"><i class="fas fa-terminal"></i> Linux</span>
-        <span class="tech-tag"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
-        <span class="tech-tag"><i class="fas fa-brain"></i> AI / ML cơ bản</span>
-        <span class="tech-tag"><i class="fas fa-shield-alt"></i> An toàn thông tin</span>
+        <div class="skill-panel" data-aos>
+          <div class="panel-header mono"><span class="t-prompt">&gt;</span> tools/</div>
+          <div class="tools-grid">
+            <div class="tool-badge"><i class="fab fa-git-alt"></i> Git</div>
+            <div class="tool-badge"><i class="fab fa-github"></i> GitHub</div>
+            <div class="tool-badge"><i class="fab fa-docker"></i> Docker</div>
+            <div class="tool-badge"><i class="fas fa-database"></i> MongoDB</div>
+            <div class="tool-badge"><i class="fas fa-terminal"></i> Linux</div>
+            <div class="tool-badge"><i class="fas fa-brain"></i> AI / ML</div>
+            <div class="tool-badge"><i class="fas fa-shield-alt"></i> Security</div>
+            <div class="tool-badge"><i class="fas fa-mobile-alt"></i> Responsive</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Education Section -->
-  <section class="section" id="education">
+  <!-- ===== AI VISION ===== -->
+  <section class="section" id="ai-section">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Học vấn</span>
-        <h2 class="section-title">Quá trình học tập</h2>
+        <span class="mono section-num">04.</span>
+        <h2 class="section-title">AI<span class="title-accent">_VISION</span></h2>
         <div class="section-line"></div>
       </div>
 
-      <div class="timeline">
-        <div class="timeline-item" data-aos>
-          <div class="timeline-dot"><i class="fas fa-university"></i></div>
-          <div class="timeline-card">
-            <div class="timeline-header">
-              <h3>Trường Đại học Điện Lực</h3>
-              <span class="timeline-date"><i class="fas fa-calendar-alt"></i> 2022 – Nay</span>
-            </div>
-            <p class="timeline-major"><i class="fas fa-book"></i> Công nghệ thông tin</p>
-            <p class="timeline-desc">
-              Theo học chương trình cử nhân ngành Công nghệ thông tin. Trang bị kiến thức nền tảng vững chắc
-              về lập trình, cơ sở dữ liệu, mạng máy tính, an toàn thông tin và phát triển phần mềm.
-            </p>
-            <div class="timeline-tags">
-              <span>Lập trình</span>
-              <span>Cơ sở dữ liệu</span>
-              <span>Mạng máy tính</span>
-              <span>CNPM</span>
-            </div>
+      <p class="ai-intro mono" data-aos>// Những lĩnh vực AI tôi đang khám phá và học hỏi</p>
+
+      <div class="ai-grid">
+        <div class="ai-card" data-aos>
+          <div class="ai-img-wrap">
+            <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="Generative AI" />
+            <div class="ai-img-glow"></div>
+          </div>
+          <div class="ai-card-body">
+            <span class="mono ai-tag">01 // GenAI</span>
+            <h3>Generative AI</h3>
+            <p>Nghiên cứu các mô hình AI tạo sinh như GPT, Stable Diffusion. Ứng dụng trong tạo nội dung và hỗ trợ lập trình.</p>
           </div>
         </div>
 
-        <div class="timeline-item" data-aos>
-          <div class="timeline-dot"><i class="fas fa-certificate"></i></div>
-          <div class="timeline-card">
-            <div class="timeline-header">
-              <h3>Chứng chỉ & Khóa học</h3>
-              <span class="timeline-date"><i class="fas fa-calendar-alt"></i> 2023 – Nay</span>
-            </div>
-            <p class="timeline-major"><i class="fas fa-award"></i> Tự học & Online Courses</p>
-            <p class="timeline-desc">
-              Hoàn thành các khóa học trực tuyến về Web Development, Python cơ bản,
-              và các chứng chỉ công nghệ thông tin.
-            </p>
-            <div class="timeline-tags">
-              <span>Web Dev</span>
-              <span>Python</span>
-              <span>Udemy</span>
-              <span>Coursera</span>
-            </div>
+        <div class="ai-card" data-aos>
+          <div class="ai-img-wrap">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt="Neural Network" />
+            <div class="ai-img-glow"></div>
+          </div>
+          <div class="ai-card-body">
+            <span class="mono ai-tag">02 // ML</span>
+            <h3>Machine Learning</h3>
+            <p>Học các thuật toán học máy cơ bản, mạng neural nhân tạo và ứng dụng vào phân tích dữ liệu.</p>
+          </div>
+        </div>
+
+        <div class="ai-card" data-aos>
+          <div class="ai-img-wrap">
+            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80" alt="Circuit Board" />
+            <div class="ai-img-glow"></div>
+          </div>
+          <div class="ai-card-body">
+            <span class="mono ai-tag">03 // IoT + AI</span>
+            <h3>Smart Systems</h3>
+            <p>Kết hợp IoT với AI để xây dựng hệ thống thông minh, ứng dụng trong đời sống và công nghiệp.</p>
+          </div>
+        </div>
+
+        <div class="ai-card ai-card-wide" data-aos>
+          <div class="ai-img-wrap">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&q=80" alt="Matrix Code" />
+            <div class="ai-img-glow"></div>
+          </div>
+          <div class="ai-card-body">
+            <span class="mono ai-tag">04 // Security AI</span>
+            <h3>AI in Cybersecurity</h3>
+            <p>Tìm hiểu ứng dụng AI trong phát hiện xâm nhập, phân tích mã độc và bảo mật hệ thống thông tin — lĩnh vực giao thoa giữa CNTT và an ninh mạng.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Stats Section -->
-  <section class="section section-accent" id="stats">
+  <!-- ===== EDUCATION ===== -->
+  <section class="section section-alt" id="education">
     <div class="container">
-      <div class="stats-grid">
-        <div class="stat-card" data-aos>
-          <div class="stat-number" data-count="3">0</div>
-          <div class="stat-label">Năm học đại học</div>
+      <div class="section-header">
+        <span class="mono section-num">05.</span>
+        <h2 class="section-title">EDU<span class="title-accent">_LOG</span></h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="edu-timeline">
+        <div class="edu-item" data-aos>
+          <div class="edu-year mono">2022 — NOW</div>
+          <div class="edu-card">
+            <div class="edu-card-icon"><i class="fas fa-university"></i></div>
+            <div class="edu-card-content">
+              <h3>Trường Đại học Điện Lực <span class="edu-badge">EPU</span></h3>
+              <p class="mono edu-major">&gt; Công nghệ thông tin</p>
+              <p>Chương trình cử nhân CNTT. Kiến thức về lập trình, CSDL, mạng máy tính, an toàn thông tin và phát triển phần mềm.</p>
+              <div class="edu-tags">
+                <span>OOP</span><span>Database</span><span>Networking</span><span>Software Eng.</span><span>AI Cơ bản</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="stat-card" data-aos>
-          <div class="stat-number" data-count="15">0</div>
-          <div class="stat-label">Dự án thực hiện</div>
-        </div>
-        <div class="stat-card" data-aos>
-          <div class="stat-number" data-count="8">0</div>
-          <div class="stat-label">Ngôn ngữ lập trình</div>
-        </div>
-        <div class="stat-card" data-aos>
-          <div class="stat-number" data-count="100">0</div>
-          <div class="stat-label">% Đam mê & Cố gắng</div>
+
+        <div class="edu-item" data-aos>
+          <div class="edu-year mono">2023 — NOW</div>
+          <div class="edu-card">
+            <div class="edu-card-icon"><i class="fas fa-certificate"></i></div>
+            <div class="edu-card-content">
+              <h3>Online Courses & Certifications</h3>
+              <p class="mono edu-major">&gt; Self-learning Path</p>
+              <p>Các khóa học về Web Development, Python, Machine Learning cơ bản trên các nền tảng học trực tuyến quốc tế.</p>
+              <div class="edu-tags">
+                <span>Udemy</span><span>Coursera</span><span>FreeCodeCamp</span><span>YouTube</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- ===== CONTACT ===== -->
   <section class="section" id="contact">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Liên hệ</span>
-        <h2 class="section-title">Kết nối với tôi</h2>
+        <span class="mono section-num">06.</span>
+        <h2 class="section-title">GET_IN<span class="title-accent">_TOUCH</span></h2>
         <div class="section-line"></div>
       </div>
 
-      <div class="contact-wrapper">
-        <div class="contact-info" data-aos>
-          <h3>Hãy liên hệ!</h3>
-          <p>Nếu bạn muốn hợp tác, học hỏi cùng nhau, hoặc đơn giản chỉ muốn nói chuyện về công nghệ — đừng ngại liên hệ với tôi!</p>
+      <div class="contact-layout">
+        <div class="contact-left" data-aos>
+          <p class="mono contact-intro">// Sẵn sàng kết nối, hợp tác và học hỏi cùng nhau</p>
           <div class="contact-links">
-            <a href="mailto:pdat@example.com" class="contact-link">
-              <div class="contact-link-icon"><i class="fas fa-envelope"></i></div>
-              <div>
-                <span class="contact-link-label">Email</span>
-                <span class="contact-link-value">pdat@example.com</span>
+            <a href="mailto:np21062004@gmail.com" class="c-link">
+              <div class="c-link-icon"><i class="fas fa-envelope"></i></div>
+              <div class="c-link-info">
+                <span class="mono c-link-lbl">email</span>
+                <span class="c-link-val">np21062004@gmail.com</span>
               </div>
+              <i class="fas fa-arrow-right c-link-arrow"></i>
             </a>
-            <a href="#" class="contact-link">
-              <div class="contact-link-icon"><i class="fab fa-github"></i></div>
-              <div>
-                <span class="contact-link-label">GitHub</span>
-                <span class="contact-link-value">github.com/phungtiendat</span>
+            <a href="https://github.com/datnqbv" target="_blank" class="c-link">
+              <div class="c-link-icon"><i class="fab fa-github"></i></div>
+              <div class="c-link-info">
+                <span class="mono c-link-lbl">github</span>
+                <span class="c-link-val">github.com/datnqbv</span>
               </div>
+              <i class="fas fa-arrow-right c-link-arrow"></i>
             </a>
-            <a href="#" class="contact-link">
-              <div class="contact-link-icon"><i class="fab fa-facebook"></i></div>
-              <div>
-                <span class="contact-link-label">Facebook</span>
-                <span class="contact-link-value">fb.com/phungtiendat</span>
+            <a href="#" class="c-link">
+              <div class="c-link-icon"><i class="fab fa-facebook"></i></div>
+              <div class="c-link-info">
+                <span class="mono c-link-lbl">facebook</span>
+                <span class="c-link-val">fb.com/phungtiendat</span>
               </div>
-            </a>
-            <a href="#" class="contact-link">
-              <div class="contact-link-icon"><i class="fab fa-linkedin"></i></div>
-              <div>
-                <span class="contact-link-label">LinkedIn</span>
-                <span class="contact-link-value">linkedin.com/in/phungtiendat</span>
-              </div>
+              <i class="fas fa-arrow-right c-link-arrow"></i>
             </a>
           </div>
         </div>
 
-        <form class="contact-form" data-aos id="contactForm">
-          <div class="form-group">
-            <label for="name">Tên của bạn</label>
-            <input type="text" id="name" placeholder="Nhập tên của bạn..." required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Nhập email của bạn..." required />
-          </div>
-          <div class="form-group">
-            <label for="message">Lời nhắn</label>
-            <textarea id="message" rows="5" placeholder="Nhập lời nhắn của bạn..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-full">
-            <i class="fas fa-paper-plane"></i> Gửi lời nhắn
-          </button>
-          <div class="form-success" id="formSuccess">
-            <i class="fas fa-check-circle"></i> Cảm ơn! Tôi sẽ phản hồi sớm nhất có thể.
+        <form class="contact-form-cyber" data-aos id="contactForm">
+          <div class="cf-header mono"><span class="t-prompt">&gt;</span> send_message.exe</div>
+          <div class="cf-body">
+            <div class="cf-group">
+              <label class="mono">name:</label>
+              <input type="text" placeholder="Nhập tên của bạn..." required />
+            </div>
+            <div class="cf-group">
+              <label class="mono">email:</label>
+              <input type="email" placeholder="Nhập email..." required />
+            </div>
+            <div class="cf-group">
+              <label class="mono">message:</label>
+              <textarea rows="4" placeholder="Nội dung..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-cyber btn-full">
+              <span class="btn-inner"><i class="fas fa-paper-plane"></i> TRANSMIT</span>
+            </button>
+            <div class="form-success" id="formSuccess">
+              <i class="fas fa-check-circle"></i> Message sent successfully!
+            </div>
           </div>
         </form>
       </div>
@@ -371,14 +432,14 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-logo">PTĐ</div>
-      <p>© 2026 Phùng Tiến Đạt · Sinh viên CNTT - ĐH Điện Lực</p>
+    <div class="footer-inner">
+      <div class="mono footer-logo">&lt;PTĐ/&gt;</div>
+      <p class="mono footer-copy">// © 2026 Phùng Tiến Đạt · EPU · CNTT</p>
       <div class="footer-social">
-        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/datnqbv" target="_blank"><i class="fab fa-github"></i></a>
         <a href="#"><i class="fab fa-facebook"></i></a>
         <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fas fa-envelope"></i></a>
+        <a href="mailto:np21062004@gmail.com"><i class="fas fa-envelope"></i></a>
       </div>
     </div>
   </footer>

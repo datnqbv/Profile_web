@@ -1,399 +1,277 @@
-/* ===================================================
-   Profile Page - Phùng Tiến Đạt
-   Interactive JS: Particles, Typing, Scroll, AOS,
-   Skill Bars, Counter, Navbar, Form
-   =================================================== */
+﻿/* ============================================
+   CYBERPUNK TECH PROFILE – Script
+   Phùng Tiến Đạt
+   ============================================ */
 
-// ─── DOM Ready ───────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  createParticles();
-  initTyping();
+  initMatrix();
   initNavbar();
+  initHamburger();
+  initTyping();
   initScrollSpy();
   initAOS();
   initSkillBars();
   initCounters();
   initContactForm();
-  initHamburger();
+  initAvatarUpload();
 });
 
-/* ===== 1. PARTICLES ===== */
-function createParticles() {
-  const container = document.getElementById('particles');
-  const count = 35;
+/* ─── MATRIX RAIN ───────────────────────────── */
+function initMatrix() {
+  const canvas = document.getElementById('matrixCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
 
-  for (let i = 0; i < count; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
+  let W, H, cols, drops;
 
-    const size = Math.random() * 6 + 2;
-    const left = Math.random() * 100;
-    const duration = Math.random() * 20 + 15;
-    const delay = Math.random() * 20;
-    const colors = [
-      'rgba(108,99,255,0.4)',
-      'rgba(0,210,255,0.3)',
-      'rgba(253,121,168,0.3)',
-      'rgba(162,155,254,0.3)',
-    ];
-
-    p.style.cssText = `
-      width: ${size}px;
-      height: ${size}px;
-      left: ${left}%;
-      bottom: -10px;
-      background: ${colors[Math.floor(Math.random() * colors.length)]};
-      animation-duration: ${duration}s;
-      animation-delay: ${delay}s;
-    `;
-
-    container.appendChild(p);
+  function setup() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    const fontSize = 14;
+    cols = Math.floor(W / fontSize);
+    drops = Array.from({ length: cols }, () => Math.random() * -100);
   }
-}
 
-/* ===== 2. TYPING EFFECT ===== */
-function initTyping() {
-  const el = document.getElementById('typingName');
-  if (!el) return;
+  setup();
+  window.addEventListener('resize', setup);
 
-  const text = 'Phùng Tiến Đạt';
-  let index = 0;
-  let isDeleting = false;
-  let pause = false;
+  const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>{}[]=/\\|#@$%^&*';
 
-  function type() {
-    if (pause) return;
+  function draw() {
+    ctx.fillStyle = 'rgba(5,5,16,0.05)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#00fff0';
+    ctx.font = '14px "Share Tech Mono", monospace';
 
-    if (!isDeleting) {
-      el.textContent = text.slice(0, index + 1);
-      index++;
-      if (index === text.length) {
-        pause = true;
-        setTimeout(() => { pause = false; isDeleting = true; type(); }, 3000);
-        return;
-      }
-    } else {
-      el.textContent = text.slice(0, index - 1);
-      index--;
-      if (index === 0) {
-        isDeleting = false;
-        setTimeout(type, 500);
-        return;
-      }
+    for (let i = 0; i < drops.length; i++) {
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(char, i * 14, drops[i] * 14);
+      if (drops[i] * 14 > H && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
     }
-
-    setTimeout(type, isDeleting ? 60 : 100);
   }
 
-  // Start after hero greeting animation (0.4s delay)
-  setTimeout(type, 600);
+  setInterval(draw, 50);
 }
 
-/* ===== 3. NAVBAR - Scroll Effect ===== */
+/* ─── NAVBAR ────────────────────────────────── */
 function initNavbar() {
-  const navbar = document.getElementById('navbar');
-  let lastScroll = 0;
-
+  const nav = document.querySelector('.navbar');
+  if (!nav) return;
   window.addEventListener('scroll', () => {
-    const current = window.scrollY;
-
-    if (current > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-
-    // Hide/show on scroll direction (optional smooth feel)
-    if (current > lastScroll && current > 300) {
-      navbar.style.transform = 'translateY(-100%)';
-    } else {
-      navbar.style.transform = 'translateY(0)';
-    }
-
-    lastScroll = current;
+    nav.classList.toggle('scrolled', window.scrollY > 50);
   });
 }
 
-/* ===== 4. SCROLL SPY (Active Nav Link) ===== */
-function initScrollSpy() {
-  const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav-link');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          links.forEach((link) => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + entry.target.id) {
-              link.classList.add('active');
-            }
-          });
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
-
-  sections.forEach((section) => observer.observe(section));
-}
-
-/* ===== 5. SCROLL ANIMATIONS (AOS replacement) ===== */
-function initAOS() {
-  const elements = document.querySelectorAll('[data-aos]');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          // Stagger children inside grids/rows
-          const delay = Array.from(
-            entry.target.parentElement?.children || []
-          ).indexOf(entry.target);
-
-          setTimeout(() => {
-            entry.target.classList.add('aos-animate');
-          }, delay * 100);
-
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
-  );
-
-  elements.forEach((el) => observer.observe(el));
-}
-
-/* ===== 6. SKILL BARS ===== */
-function initSkillBars() {
-  const bars = document.querySelectorAll('.skill-fill');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const bar = entry.target;
-          const width = bar.getAttribute('data-width');
-          setTimeout(() => {
-            bar.style.width = width + '%';
-          }, 200);
-          observer.unobserve(bar);
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
-
-  bars.forEach((bar) => observer.observe(bar));
-}
-
-/* ===== 7. COUNTERS ===== */
-function initCounters() {
-  const counters = document.querySelectorAll('.stat-number[data-count]');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const target = parseInt(el.getAttribute('data-count'));
-          animateCounter(el, target);
-          observer.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  counters.forEach((counter) => observer.observe(counter));
-}
-
-function animateCounter(el, target) {
-  const duration = 1800;
-  const start = performance.now();
-  const suffix = target === 100 ? '%' : '+';
-
-  function update(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    // Ease out cubic
-    const eased = 1 - Math.pow(1 - progress, 3);
-    const current = Math.floor(eased * target);
-
-    el.textContent = current + (progress < 1 ? '' : suffix);
-
-    if (progress < 1) {
-      requestAnimationFrame(update);
-    }
-  }
-
-  requestAnimationFrame(update);
-}
-
-/* ===== 8. HAMBURGER MENU ===== */
+/* ─── HAMBURGER ─────────────────────────────── */
 function initHamburger() {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.querySelector('.nav-links');
+  const btn   = document.querySelector('.hamburger');
+  const links = document.querySelector('.nav-links');
+  if (!btn || !links) return;
 
-  if (!hamburger || !navLinks) return;
-
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('open');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    links.classList.toggle('open');
   });
 
-  // Close on link click
-  navLinks.querySelectorAll('.nav-link').forEach((link) => {
+  links.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('open');
+      btn.classList.remove('active');
+      links.classList.remove('open');
     });
   });
-
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('open');
-    }
-  });
 }
 
-/* ===== 9. CONTACT FORM ===== */
+/* ─── TYPING EFFECT ─────────────────────────── */
+function initTyping() {
+  const el = document.getElementById('typingRole');
+  if (!el) return;
+
+  const roles = [
+    'Frontend Developer',
+    'IT Student',
+    'AI Enthusiast',
+    'Problem Solver',
+    'Web Developer'
+  ];
+
+  let roleIdx = 0, charIdx = 0, deleting = false;
+
+  function type() {
+    const current = roles[roleIdx];
+    if (!deleting) {
+      el.textContent = current.slice(0, charIdx + 1);
+      charIdx++;
+      if (charIdx === current.length) {
+        deleting = true;
+        setTimeout(type, 1800);
+        return;
+      }
+    } else {
+      el.textContent = current.slice(0, charIdx - 1);
+      charIdx--;
+      if (charIdx === 0) {
+        deleting = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+      }
+    }
+    setTimeout(type, deleting ? 60 : 100);
+  }
+
+  setTimeout(type, 800);
+}
+
+/* ─── SCROLL SPY ────────────────────────────── */
+function initScrollSpy() {
+  const sections = document.querySelectorAll('section[id]');
+  const links    = document.querySelectorAll('.nav-link');
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => obs.observe(s));
+}
+
+/* ─── AOS ───────────────────────────────────── */
+function initAOS() {
+  const els = document.querySelectorAll('[data-aos]');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const delay = e.target.dataset.aosDelay || 0;
+        setTimeout(() => e.target.classList.add('aos-animate'), parseInt(delay));
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(el => obs.observe(el));
+}
+
+/* ─── SKILL BARS ────────────────────────────── */
+function initSkillBars() {
+  const bars = document.querySelectorAll('.skill-fill[data-width]');
+  const obs  = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.width + '%';
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b => obs.observe(b));
+}
+
+/* ─── COUNTERS ──────────────────────────────── */
+function initCounters() {
+  const nums = document.querySelectorAll('.stat-num[data-count]');
+  const obs  = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      obs.unobserve(e.target);
+      const target = parseInt(e.target.dataset.count);
+      const suffix = e.target.dataset.suffix || '';
+      let current = 0;
+      const step = Math.ceil(target / 60);
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        e.target.textContent = current + suffix;
+        if (current >= target) clearInterval(timer);
+      }, 25);
+    });
+  }, { threshold: 0.5 });
+  nums.forEach(n => obs.observe(n));
+}
+
+/* ─── CONTACT FORM ──────────────────────────── */
 function initContactForm() {
-  const form = document.getElementById('contactForm');
-  const successMsg = document.getElementById('formSuccess');
+  const form    = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
-
     const btn = form.querySelector('button[type="submit"]');
-    const originalText = btn.innerHTML;
-
-    // Loading state
-    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Đang gửi...';
+    btn.textContent = 'SENDING...';
     btn.disabled = true;
 
-    // Simulate async send
     setTimeout(() => {
-      btn.innerHTML = originalText;
-      btn.disabled = false;
       form.reset();
-
-      if (successMsg) {
-        successMsg.classList.add('show');
-        setTimeout(() => successMsg.classList.remove('show'), 5000);
-      }
+      btn.textContent = 'SEND_MESSAGE';
+      btn.disabled = false;
+      if (success) success.classList.add('show');
+      setTimeout(() => success?.classList.remove('show'), 5000);
     }, 1500);
   });
 }
 
-/* ===== 10. SMOOTH SCROLL for anchor links ===== */
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener('click', (e) => {
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      const navH = document.getElementById('navbar')?.offsetHeight || 70;
-      const top = target.getBoundingClientRect().top + window.scrollY - navH;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  });
-});
-
-/* ===== 11. CURSOR / HOVER GLOW on Cards ===== */
-document.querySelectorAll('.about-card, .stat-card, .timeline-card, .skills-group').forEach((card) => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty('--glow-x', `${x}px`);
-    card.style.setProperty('--glow-y', `${y}px`);
-  });
-});
-
-/* ===== 12. AVATAR IMAGE UPLOAD ===== */
+/* ─── AVATAR UPLOAD ─────────────────────────── */
 function initAvatarUpload() {
-  const ring     = document.getElementById('avatarRing');
-  const input    = document.getElementById('avatarInput');
-  const img      = document.getElementById('avatarImg');
-  const initials = document.getElementById('avatarInitials');
-  const overlay  = document.getElementById('avatarOverlay');
+  const ring    = document.getElementById('avatarRing');
+  const inner   = document.getElementById('avatarInner');
+  const input   = document.getElementById('avatarInput');
+  const img     = document.getElementById('avatarImg');
+  const initials= document.getElementById('avatarInitials');
+  const rmBtn   = document.getElementById('avatarRemove');
 
-  if (!ring || !input || !img) return;
+  if (!ring || !inner || !input || !img) return;
 
-  // Add remove button dynamically
-  const removeBtn = document.createElement('button');
-  removeBtn.className = 'avatar-remove';
-  removeBtn.innerHTML = '<i class="fas fa-times"></i>';
-  removeBtn.title = 'Xoá ảnh';
-  ring.appendChild(removeBtn);
+  // Load saved avatar
+  const saved = localStorage.getItem('avatarSrc');
+  if (saved) {
+    img.src = saved;
+    img.style.display = 'block';
+    if (initials) initials.style.display = 'none';
+    if (rmBtn) rmBtn.style.display = 'flex';
+  }
 
-  // Click avatar → open file picker
-  document.getElementById('avatarInner').addEventListener('click', () => {
-    input.click();
+  // Click to upload
+  inner.addEventListener('click', () => input.click());
+
+  input.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (file) loadFile(file);
   });
 
-  // File selected
-  input.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file || !file.type.startsWith('image/')) return;
-
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      img.src = ev.target.result;
-      img.style.display = 'block';
-      initials.style.display = 'none';
-      // Store in localStorage so it persists on reload
-      try { localStorage.setItem('ptd_avatar', ev.target.result); } catch (_) {}
-    };
-    reader.readAsDataURL(file);
-    input.value = ''; // reset so same file can be re-selected
+  // Drag and drop
+  ring.addEventListener('dragover', e => { e.preventDefault(); ring.style.opacity = '0.7'; });
+  ring.addEventListener('dragleave', () => { ring.style.opacity = '1'; });
+  ring.addEventListener('drop', e => {
+    e.preventDefault();
+    ring.style.opacity = '1';
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) loadFile(file);
   });
 
   // Remove button
-  removeBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    img.src = '';
-    img.style.display = 'none';
-    initials.style.display = 'block';
-    try { localStorage.removeItem('ptd_avatar'); } catch (_) {}
-  });
+  if (rmBtn) {
+    rmBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      img.src = '';
+      img.style.display = 'none';
+      if (initials) initials.style.display = 'block';
+      rmBtn.style.display = 'none';
+      localStorage.removeItem('avatarSrc');
+      input.value = '';
+    });
+  }
 
-  // Restore from localStorage on load
-  try {
-    const saved = localStorage.getItem('ptd_avatar');
-    if (saved) {
-      img.src = saved;
-      img.style.display = 'block';
-      initials.style.display = 'none';
-    }
-  } catch (_) {}
-
-  // Drag & Drop onto avatar
-  const inner = document.getElementById('avatarInner');
-  inner.addEventListener('dragover', (e) => { e.preventDefault(); overlay.style.opacity = '1'; });
-  inner.addEventListener('dragleave', () => { overlay.style.opacity = ''; });
-  inner.addEventListener('drop', (e) => {
-    e.preventDefault();
-    overlay.style.opacity = '';
-    const file = e.dataTransfer.files[0];
-    if (!file || !file.type.startsWith('image/')) return;
+  function loadFile(file) {
     const reader = new FileReader();
-    reader.onload = (ev) => {
-      img.src = ev.target.result;
+    reader.onload = ev => {
+      const src = ev.target.result;
+      img.src = src;
       img.style.display = 'block';
-      initials.style.display = 'none';
-      try { localStorage.setItem('ptd_avatar', ev.target.result); } catch (_) {}
+      if (initials) initials.style.display = 'none';
+      if (rmBtn) rmBtn.style.display = 'flex';
+      try { localStorage.setItem('avatarSrc', src); } catch(e) {}
     };
     reader.readAsDataURL(file);
-  });
+  }
 }
-
-initAvatarUpload();
-
-/* ===== 12. YEAR in footer (auto update) ===== */
-const yearEls = document.querySelectorAll('.footer-year');
-yearEls.forEach((el) => (el.textContent = new Date().getFullYear()));
