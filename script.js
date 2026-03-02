@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSkillBars();
   initCounters();
   initContactForm();
-  initAvatarUpload();
 });
 
 /* ─── MATRIX RAIN ───────────────────────────── */
@@ -211,67 +210,4 @@ function initContactForm() {
   });
 }
 
-/* ─── AVATAR UPLOAD ─────────────────────────── */
-function initAvatarUpload() {
-  const ring    = document.getElementById('avatarRing');
-  const inner   = document.getElementById('avatarInner');
-  const input   = document.getElementById('avatarInput');
-  const img     = document.getElementById('avatarImg');
-  const initials= document.getElementById('avatarInitials');
-  const rmBtn   = document.getElementById('avatarRemove');
 
-  if (!ring || !inner || !input || !img) return;
-
-  // Load saved avatar
-  const saved = localStorage.getItem('avatarSrc');
-  if (saved) {
-    img.src = saved;
-    img.style.display = 'block';
-    if (initials) initials.style.display = 'none';
-    if (rmBtn) rmBtn.style.display = 'flex';
-  }
-
-  // Click to upload
-  inner.addEventListener('click', () => input.click());
-
-  input.addEventListener('change', e => {
-    const file = e.target.files[0];
-    if (file) loadFile(file);
-  });
-
-  // Drag and drop
-  ring.addEventListener('dragover', e => { e.preventDefault(); ring.style.opacity = '0.7'; });
-  ring.addEventListener('dragleave', () => { ring.style.opacity = '1'; });
-  ring.addEventListener('drop', e => {
-    e.preventDefault();
-    ring.style.opacity = '1';
-    const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith('image/')) loadFile(file);
-  });
-
-  // Remove button
-  if (rmBtn) {
-    rmBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      img.src = '';
-      img.style.display = 'none';
-      if (initials) initials.style.display = 'block';
-      rmBtn.style.display = 'none';
-      localStorage.removeItem('avatarSrc');
-      input.value = '';
-    });
-  }
-
-  function loadFile(file) {
-    const reader = new FileReader();
-    reader.onload = ev => {
-      const src = ev.target.result;
-      img.src = src;
-      img.style.display = 'block';
-      if (initials) initials.style.display = 'none';
-      if (rmBtn) rmBtn.style.display = 'flex';
-      try { localStorage.setItem('avatarSrc', src); } catch(e) {}
-    };
-    reader.readAsDataURL(file);
-  }
-}
