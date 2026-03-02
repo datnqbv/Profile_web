@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phùng Tiến Đạt | Profile</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Particles Background -->
+  <div id="particles"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">PTĐ</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active">Trang chủ</a></li>
+      <li><a href="#about" class="nav-link">Về tôi</a></li>
+      <li><a href="#skills" class="nav-link">Kỹ năng</a></li>
+      <li><a href="#education" class="nav-link">Học vấn</a></li>
+      <li><a href="#contact" class="nav-link">Liên hệ</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-greeting">Xin chào, tôi là</p>
+        <h1 class="hero-name">
+          <span class="typing" id="typingName"></span><span class="cursor">|</span>
+        </h1>
+        <p class="hero-role">
+          <span class="role-text">Sinh viên IT</span> &nbsp;·&nbsp;
+          <span class="role-text">Lập trình viên</span> &nbsp;·&nbsp;
+          <span class="role-text">Người học hỏi</span>
+        </p>
+        <p class="hero-desc">
+          Sinh viên ngành <strong>Công nghệ thông tin</strong> tại
+          <strong>Trường Đại học Điện Lực</strong>, đam mê lập trình và xây dựng
+          những sản phẩm công nghệ có giá trị.
+        </p>
+        <div class="hero-buttons">
+          <a href="#about" class="btn btn-primary">Khám phá</a>
+          <a href="#contact" class="btn btn-outline">Liên hệ tôi</a>
+        </div>
+      </div>
+      <div class="hero-avatar">
+        <input type="file" id="avatarInput" accept="image/*" style="display:none" />
+        <div class="avatar-ring" id="avatarRing" title="Nhấn để đổi ảnh">
+          <div class="avatar-inner" id="avatarInner">
+            <img src="" alt="Avatar" class="avatar-img" id="avatarImg" style="display:none" />
+            <div class="avatar-initials" id="avatarInitials">PTĐ</div>
+            <div class="avatar-overlay" id="avatarOverlay">
+              <i class="fas fa-camera"></i>
+              <span>Đổi ảnh</span>
+            </div>
+          </div>
+        </div>
+        <div class="avatar-badge">
+          <i class="fas fa-code"></i>
+          <span>IT Student</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-down">
+      <div class="mouse"><div class="wheel"></div></div>
+      <p>Cuộn xuống</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Về tôi</span>
+        <h2 class="section-title">Tôi là ai?</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-card" data-aos>
+          <div class="about-icon"><i class="fas fa-user-graduate"></i></div>
+          <h3>Học vấn</h3>
+          <p>Đang theo học chương trình đại học tại Trường Đại học Điện Lực, chuyên ngành Công nghệ thông tin.</p>
+        </div>
+        <div class="about-card" data-aos>
+          <div class="about-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>Đam mê</h3>
+          <p>Yêu thích lập trình web, thiết kế giao diện và khám phá các công nghệ mới trong lĩnh vực CNTT.</p>
+        </div>
+        <div class="about-card" data-aos>
+          <div class="about-icon"><i class="fas fa-bullseye"></i></div>
+          <h3>Mục tiêu</h3>
+          <p>Trở thành một lập trình viên chuyên nghiệp, đóng góp vào sự phát triển công nghệ của đất nước.</p>
+        </div>
+        <div class="about-card" data-aos>
+          <div class="about-icon"><i class="fas fa-heart"></i></div>
+          <h3>Sở thích</h3>
+          <p>Ngoài lập trình, tôi thích đọc sách công nghệ, chơi thể thao và tìm hiểu về AI & Machine Learning.</p>
+        </div>
+      </div>
+
+      <!-- Info Cards -->
+      <div class="info-row" data-aos>
+        <div class="info-item">
+          <i class="fas fa-user"></i>
+          <div>
+            <span class="info-label">Họ và tên</span>
+            <span class="info-value">Phùng Tiến Đạt</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-university"></i>
+          <div>
+            <span class="info-label">Trường</span>
+            <span class="info-value">ĐH Điện Lực</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-book-open"></i>
+          <div>
+            <span class="info-label">Chuyên ngành</span>
+            <span class="info-value">Công nghệ thông tin</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <span class="info-label">Địa điểm</span>
+            <span class="info-value">Hà Nội, Việt Nam</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section section-dark" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Kỹ năng</span>
+        <h2 class="section-title">Kỹ năng của tôi</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="skills-wrapper">
+        <div class="skills-group" data-aos>
+          <h3 class="skills-group-title"><i class="fas fa-code"></i> Lập trình Frontend</h3>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>HTML5</span><span>90%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>CSS3 / SCSS</span><span>85%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>JavaScript</span><span>75%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>ReactJS</span><span>60%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
+          </div>
+        </div>
+
+        <div class="skills-group" data-aos>
+          <h3 class="skills-group-title"><i class="fas fa-server"></i> Lập trình Backend</h3>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Python</span><span>70%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Java</span><span>65%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>SQL / MySQL</span><span>72%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Node.js</span><span>55%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="55"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tech Tags -->
+      <div class="tech-tags" data-aos>
+        <span class="tech-tag"><i class="fab fa-git-alt"></i> Git</span>
+        <span class="tech-tag"><i class="fab fa-github"></i> GitHub</span>
+        <span class="tech-tag"><i class="fas fa-database"></i> MongoDB</span>
+        <span class="tech-tag"><i class="fab fa-docker"></i> Docker</span>
+        <span class="tech-tag"><i class="fas fa-terminal"></i> Linux</span>
+        <span class="tech-tag"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
+        <span class="tech-tag"><i class="fas fa-brain"></i> AI / ML cơ bản</span>
+        <span class="tech-tag"><i class="fas fa-shield-alt"></i> An toàn thông tin</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="section" id="education">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Học vấn</span>
+        <h2 class="section-title">Quá trình học tập</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item" data-aos>
+          <div class="timeline-dot"><i class="fas fa-university"></i></div>
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <h3>Trường Đại học Điện Lực</h3>
+              <span class="timeline-date"><i class="fas fa-calendar-alt"></i> 2022 – Nay</span>
+            </div>
+            <p class="timeline-major"><i class="fas fa-book"></i> Công nghệ thông tin</p>
+            <p class="timeline-desc">
+              Theo học chương trình cử nhân ngành Công nghệ thông tin. Trang bị kiến thức nền tảng vững chắc
+              về lập trình, cơ sở dữ liệu, mạng máy tính, an toàn thông tin và phát triển phần mềm.
+            </p>
+            <div class="timeline-tags">
+              <span>Lập trình</span>
+              <span>Cơ sở dữ liệu</span>
+              <span>Mạng máy tính</span>
+              <span>CNPM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos>
+          <div class="timeline-dot"><i class="fas fa-certificate"></i></div>
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <h3>Chứng chỉ & Khóa học</h3>
+              <span class="timeline-date"><i class="fas fa-calendar-alt"></i> 2023 – Nay</span>
+            </div>
+            <p class="timeline-major"><i class="fas fa-award"></i> Tự học & Online Courses</p>
+            <p class="timeline-desc">
+              Hoàn thành các khóa học trực tuyến về Web Development, Python cơ bản,
+              và các chứng chỉ công nghệ thông tin.
+            </p>
+            <div class="timeline-tags">
+              <span>Web Dev</span>
+              <span>Python</span>
+              <span>Udemy</span>
+              <span>Coursera</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="section section-accent" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card" data-aos>
+          <div class="stat-number" data-count="3">0</div>
+          <div class="stat-label">Năm học đại học</div>
+        </div>
+        <div class="stat-card" data-aos>
+          <div class="stat-number" data-count="15">0</div>
+          <div class="stat-label">Dự án thực hiện</div>
+        </div>
+        <div class="stat-card" data-aos>
+          <div class="stat-number" data-count="8">0</div>
+          <div class="stat-label">Ngôn ngữ lập trình</div>
+        </div>
+        <div class="stat-card" data-aos>
+          <div class="stat-number" data-count="100">0</div>
+          <div class="stat-label">% Đam mê & Cố gắng</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Liên hệ</span>
+        <h2 class="section-title">Kết nối với tôi</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="contact-wrapper">
+        <div class="contact-info" data-aos>
+          <h3>Hãy liên hệ!</h3>
+          <p>Nếu bạn muốn hợp tác, học hỏi cùng nhau, hoặc đơn giản chỉ muốn nói chuyện về công nghệ — đừng ngại liên hệ với tôi!</p>
+          <div class="contact-links">
+            <a href="mailto:pdat@example.com" class="contact-link">
+              <div class="contact-link-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <span class="contact-link-label">Email</span>
+                <span class="contact-link-value">pdat@example.com</span>
+              </div>
+            </a>
+            <a href="#" class="contact-link">
+              <div class="contact-link-icon"><i class="fab fa-github"></i></div>
+              <div>
+                <span class="contact-link-label">GitHub</span>
+                <span class="contact-link-value">github.com/phungtiendat</span>
+              </div>
+            </a>
+            <a href="#" class="contact-link">
+              <div class="contact-link-icon"><i class="fab fa-facebook"></i></div>
+              <div>
+                <span class="contact-link-label">Facebook</span>
+                <span class="contact-link-value">fb.com/phungtiendat</span>
+              </div>
+            </a>
+            <a href="#" class="contact-link">
+              <div class="contact-link-icon"><i class="fab fa-linkedin"></i></div>
+              <div>
+                <span class="contact-link-label">LinkedIn</span>
+                <span class="contact-link-value">linkedin.com/in/phungtiendat</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form" data-aos id="contactForm">
+          <div class="form-group">
+            <label for="name">Tên của bạn</label>
+            <input type="text" id="name" placeholder="Nhập tên của bạn..." required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Nhập email của bạn..." required />
+          </div>
+          <div class="form-group">
+            <label for="message">Lời nhắn</label>
+            <textarea id="message" rows="5" placeholder="Nhập lời nhắn của bạn..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            <i class="fas fa-paper-plane"></i> Gửi lời nhắn
+          </button>
+          <div class="form-success" id="formSuccess">
+            <i class="fas fa-check-circle"></i> Cảm ơn! Tôi sẽ phản hồi sớm nhất có thể.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">PTĐ</div>
+      <p>© 2026 Phùng Tiến Đạt · Sinh viên CNTT - ĐH Điện Lực</p>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
